@@ -6,18 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import demo.bd.PoolConexiones;
 import demo.bean.BoletaBean;
 import demo.bean.CarritoCompraBean;
 import demo.bean.ClienteNaturalyJuridicoBean;
+import demo.bean.DetalleBoletaCompraBean;
 import demo.bean.EmpleadoBean;
+import demo.bean.ProductoBean;
+
 
 
 public class BoletaDAOImpl implements BoletaDAO {
-
+	
+	
 	@Override
 	public int insertarBoleta(BoletaBean boleta) {
 		//INSERT INTO tb_boleta(id_empleado,fecha_boleta,id_cliente,estado_boleta,total_venta) 
@@ -179,6 +183,159 @@ try{
         return new java.sql.Timestamp(new java.util.Date().getTime());
   
     }
+
+	public BoletaBean obtenerUltimaBoleta() {
+		
+		BoletaBean boleta = null;
+		Connection cnx = null;
+		PreparedStatement pst =null;
+		ResultSet rs =null;
+		
+		try {
+			//cnx = new Miconexion().getConexion();
+			cnx = PoolConexiones.getConexion();
+			String sql="SELECT*FROM tb_boleta ORDER BY id_boleta DESC LIMIT 1 ";
+			
+			pst = (PreparedStatement) cnx.prepareStatement(sql);
+			pst.executeQuery();
+			rs= pst.getResultSet();
+			
+			
+			while(rs.next()) { // solo entra si hay resultado
+				
+						
+				boleta = new BoletaBean();
+				boleta.setIdBoleta(rs.getInt("id_boleta"));
+				boleta.setIdEmpleado(rs.getInt("id_empleado"));
+				boleta.setFechaBoleta(rs.getDate("fecha_boleta"));
+				boleta.setIdCliente(rs.getInt("id_cliente"));			
+			
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return boleta;
+	}
+
+	@Override
+	public DetalleBoletaCompraBean obtenerIdBoleta() {
+			
+		DetalleBoletaCompraBean boleta = null;
+		
+		
+		Connection cnx = null;
+		PreparedStatement pst =null;
+		ResultSet rs =null;
+		
+		try {
+			cnx = PoolConexiones.getConexion();
+			String sql= "SELECT id_boleta FROM tb_boleta ORDER BY id_boleta DESC LIMIT 1";
+			
+			pst = (PreparedStatement) cnx.prepareStatement(sql);
+			pst.executeQuery();
+			rs= pst.getResultSet();
+				
+			if(rs.next()) {
+				boleta = new DetalleBoletaCompraBean();
+				boleta.setIdBoleta(rs.getInt("id_boleta"));
+				
+			}
+								
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return boleta ;
+	}
+
+	@Override
+	public DetalleBoletaCompraBean obtenerDetalleBoletaById(int idBoleta) {
+		
+		DetalleBoletaCompraBean boletaDatos = null;
+		
+		Connection cnx = null;
+		PreparedStatement pst =null;
+		ResultSet rs =null;
+		
+		try {
+			
+			cnx = PoolConexiones.getConexion();
+				String sql= "SELECT a.id_boleta , a.fecha_boleta , a.total_venta , b.id_empleado , b.nombres , c.razon_social AS nombre_razon_social , c.ruc AS dni_ruc   FROM tb_boleta AS a\r\n" + 
+						"	JOIN tb_empleado AS b ON a.id_empleado = b.id_empleado \r\n" + 
+						"    JOIN tb_cliente_per_juridica AS c ON a.id_cliente = c.id_cliente\r\n" + 
+						"    WHERE a.id_boleta = ? \r\n" + 
+						"UNION \r\n" + 
+						"SELECT  a.id_boleta , a.fecha_boleta , a.total_venta , b.id_empleado , b.nombres , c.nombre AS nombre_razon_social , c.dni AS dni_ruc FROM tb_boleta AS a\r\n" + 
+						"	JOIN tb_empleado AS b ON a.id_empleado = b.id_empleado \r\n" + 
+						"    JOIN  tb_cliente_per_natural AS c ON a.id_cliente = c.id_cliente\r\n" + 
+						"    WHERE a.id_boleta = ?";
+				
+				pst = (PreparedStatement) cnx.prepareStatement(sql);
+				pst.setInt(1, idBoleta);
+				pst.setInt(2, idBoleta);
+				pst.executeQuery();
+				rs= pst.getResultSet();
+				
+				if(rs.next()) {
+					
+					boletaDatos = new DetalleBoletaCompraBean();
+					boletaDatos.setIdBoleta(rs.getInt("id_boleta"));
+					boletaDatos.setFechaBoleta(rs.getDate("fecha_boleta"));
+					boletaDatos.setIdEmpleado(rs.getInt("id_empleado"));
+					boletaDatos.setNombreEmpleado(rs.getString("nombres"));
+					boletaDatos.setNombreORazonSocial(rs.getString("nombre_razon_social"));
+					boletaDatos.setDniORuc(rs.getString("dni_ruc"));
+					boletaDatos.setTotalVenta(rs.getDouble("total_venta"));
+				}
+				
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return boletaDatos;
+	}
+
+	@Override
+	public List<DetalleBoletaCompraBean> listarDetalleCompraProductos(int idBoleta) {
+		
+		List<DetalleBoletaCompraBean>lst = new ArrayList<>();
+		Connection cnx = null;
+		PreparedStatement pst =null;
+		ResultSet rs =null;
+		
+		try {
+			cnx = PoolConexiones.getConexion();
+			String sql=	"SELECT   a.id_producto , b.nombre_producto , b.precio , a.cantidad , a.sub_total FROM tb_detalle_boleta AS a \r\n" + 
+						"JOIN tb_producto AS b ON a.id_producto = b.id_producto\r\n" + 
+						"WHERE id_boleta = ?";
+			
+			
+			pst = (PreparedStatement) cnx.prepareStatement(sql);
+			pst.setInt(1, idBoleta);
+			pst.execute();
+			rs= pst.getResultSet();
+			
+			DetalleBoletaCompraBean compraDetalle = null;
+			
+			while(rs.next()) {
+				
+				compraDetalle = new DetalleBoletaCompraBean();
+				
+				compraDetalle.setIdProducto(rs.getInt("id_producto"));
+				compraDetalle.setNombreProducto(rs.getString("nombre_producto"));
+				compraDetalle.setPrecio(rs.getDouble("precio"));
+				compraDetalle.setCantidad(rs.getInt("cantidad"));
+				compraDetalle.setSubTotal(rs.getDouble("sub_total"));
+				lst.add(compraDetalle);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return lst;
+	}	
 	
 }
 

@@ -113,8 +113,7 @@ boolean valido = false;
 									<div class="invalid-feedback">complete el campo con números</div>
 									
 								</div>	
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
 								<div class="card-body d-flex float-right  align-items-center">
 									<input type="submit" class="btn btn-primary bt-sm" value="Agregar"></input>
 								</div>					
@@ -127,7 +126,15 @@ boolean valido = false;
 		<main layout:fragment="contenido">
 			<div  class="col-md-10 offset-md-1">
 				
-			<div ><i Class="fa fa-shopping-cart fa-4x"></i></div>
+			<div class="row" >
+				<div class="col-8">
+					<i Class="fa fa-shopping-cart fa-4x"></i>
+				</div>
+				<div class="col-4" align="right">
+													
+					<a  href="<%=request.getContextPath()%>/ServletBoletaVentaExportExcel" class="btn btn-primary">Imprimir</a>
+				</div>	
+			</div>
 			
 				<div class="table-responsive">
 					<table class="table table-bordered">
@@ -174,13 +181,14 @@ boolean valido = false;
 				<div class="form-group row offset-md-1">
 						<label class="col-lg-4 col-form-label form-control-label"></label>
 						<div class="col-lg-5">
-						
+							
 							<form   action="ServletPagoFinalTx"  method="post"  >				
 								<input type="reset" class="btn btn-secondary" value="Cancelar">
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="submit" class="btn btn-primary" value="Pagar">
+								<input type="submit" class="btn btn-primary" value="Pagar">						
 							</form>
-							
+							<br>
+								
 						</div>
 					</div>
 			</div>

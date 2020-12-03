@@ -65,6 +65,7 @@ if(!valido){ // si valido es false
 		</c:if>
 		<div class="container text-left">
 			<a href="<%=request.getContextPath()%>/ServletDistrito?formulario=C" class="btn btn-success">Agregar Cliente</a>
+			<a href="<%=request.getContextPath()%>/ServletListaExportarExcel?p_reporte=REPLISTACLIENTENATURAL0003" class="btn btn-success">Exportar a Excel</a>
 		</div>
 		<br>
 		<table id="tblClienteNatural" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">

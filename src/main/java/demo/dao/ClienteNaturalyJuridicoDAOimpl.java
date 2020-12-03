@@ -36,6 +36,7 @@ public class ClienteNaturalyJuridicoDAOimpl implements ClienteNaturalyJuridicoDA
 			pst.execute();
 			rs= pst.getResultSet();
 			
+			
 			ClienteNaturalyJuridicoBean clienteNaturalJuridico = null;
 			
 			while(rs.next()) {

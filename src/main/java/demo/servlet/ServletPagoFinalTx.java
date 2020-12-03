@@ -1,6 +1,7 @@
 package demo.servlet;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,11 +15,10 @@ import javax.servlet.http.HttpSession;
 import demo.bean.CarritoCompraBean;
 import demo.bean.ClienteNaturalyJuridicoBean;
 import demo.bean.EmpleadoBean;
-import demo.bean.ProductoBean;
+
 import demo.dao.BoletaDAO;
 import demo.dao.BoletaDAOImpl;
-import demo.dao.ProductoDAO;
-import demo.dao.ProductoDAOImpl;
+
 
 /**
  * Servlet implementation class ServletPagoFinalTx
@@ -40,8 +40,7 @@ public class ServletPagoFinalTx extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+		response.getWriter().append("Served at: ").append(request.getContextPath());	
 		
 	}
 
@@ -87,9 +86,17 @@ public class ServletPagoFinalTx extends HttpServlet {
 		
 		BoletaDAO boletaDAO = new BoletaDAOImpl();
 		boolean flag = boletaDAO.insertarVenta(empleado, cliente, lstCarrito, totalBoleta);
+		
+		//
+		
+		if(flag) {
+			
+			// remover el carrito de compras 
+			// remover el cliente comprador 
+		}
 					
 		RequestDispatcher despachador = null;
-		despachador = request.getRequestDispatcher("/menuPrincipalTienda.jsp");
+		despachador = request.getRequestDispatcher("ventaFinal.jsp");
 		despachador.forward(request, response);
 		
 		System.out.println(" Fin : ServletPagoFinalTx - doPost()");

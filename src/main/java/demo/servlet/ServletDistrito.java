@@ -40,8 +40,7 @@ public class ServletDistrito extends HttpServlet {
 		
 		//traemos los distritos de la base de datos.
 		
-		DistritoDAO dao = new DistritoDAOImpl();
-		
+		DistritoDAO dao = new DistritoDAOImpl();		
 		List<DistritoBean>lista = dao.listaDistrito();
 		
 		request.setAttribute("lstDistrito", lista);

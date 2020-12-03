@@ -37,14 +37,11 @@ public class ServletListaProducto extends HttpServlet {
 		
 		System.out.println(" ini : ServletListaProducto - doGe()");
 		
-		ProductoDAO dao = new ProductoDAOImpl();
-		
+		ProductoDAO dao = new ProductoDAOImpl();	
 		List<ProductoBean>lstProducto = dao.listarProducto();
 		
-		request.setAttribute("listaProducto", lstProducto);
-		
-		RequestDispatcher despachador = null;
-		
+		request.setAttribute("listaProducto", lstProducto);	
+		RequestDispatcher despachador = null;		
 		String lista = request.getParameter("lista");
 		
 		if("L".equals(lista)) {
@@ -52,14 +49,11 @@ public class ServletListaProducto extends HttpServlet {
 			
 		}else if ("C".equals(lista)) {
 			
-			despachador = request.getRequestDispatcher("ventaFinal.jsp");
-			
+			despachador = request.getRequestDispatcher("ventaFinal.jsp");		
 		}
-		
-		
+			
 		despachador.forward(request, response);
-		
-		
+			
 		System.out.println("fin: ServletListaProducto - doGet ");
 	}
 

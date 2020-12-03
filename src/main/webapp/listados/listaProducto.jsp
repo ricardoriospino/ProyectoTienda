@@ -65,6 +65,7 @@ if(!valido){ // si valido es false
 		</c:if>
 		<div id=botonAgregar class="container text-left ">
 			<a href="<%=request.getContextPath()%>/ServletTipoProductos" class="btn btn-success">Agregar Producto</a>
+			<a href="<%=request.getContextPath()%>/ServletListaExportarExcel?p_reporte=REPLISTAPRODUCTO0001" class="btn btn-success">Exportar a Excel</a>
 		</div>
 		<br>
 		<table id="tblProducto" class="table table-striped table-bordered table-sm "  cellspacing="0" width="100%">
