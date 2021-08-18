@@ -1,7 +1,7 @@
 package rios.demo.bean;
 
 import java.io.Serializable;
-
+// para crear una vista 
 public class ClienteNaturalyJuridicoBean implements Serializable {
 	
 	private int id;

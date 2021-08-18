@@ -111,6 +111,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 				lst.add(clienteNatural);
 				
 			}
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 			log.error("error en Mi conexion listaClienteNatural" + e);
@@ -169,7 +170,6 @@ public class ClienteDAOImpl implements ClienteDAO {
 			ON a.id_cliente = b.id_cliente WHERE a.id_cliente = 50 */
 		
 		ClienteBean clienteNatural = null;
-		
 		Connection cnx = null;
 		PreparedStatement pst =null;
 		ResultSet rs =null;

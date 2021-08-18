@@ -2,7 +2,6 @@ package rios.demo.bd;
 
 import java.sql.DriverManager;
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Driver;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -27,9 +27,6 @@ public class EmpleadoBean implements Serializable {
 		
 	}
 	
-	
-
-
 	public EmpleadoBean(long id, String nombre, String apellido_materno, String apellido_paterno,
 			String fecha_nacimiento, String direccion, String telefono, long codigo_distrito, String correo,
 			String fecha_ingreso) {
@@ -46,9 +43,6 @@ public class EmpleadoBean implements Serializable {
 		this.fecha_ingreso = fecha_ingreso;
 	}
 
-
-
-
 	public EmpleadoBean(String nombre, String apellido_materno, String apellido_paterno, String fecha_nacimiento,
 			String direccion, String telefono, long codigo_distrito, String correo, String fecha_ingreso) {
 		super();
@@ -62,8 +56,6 @@ public class EmpleadoBean implements Serializable {
 		this.correo = correo;
 		this.fecha_ingreso = fecha_ingreso;
 	}
-
-
 
 	public EmpleadoBean(String nombre, String apellido_materno, String apellido_paterno, String fecha_nacimiento,
 			String direccion, String telefono, long codigo_distrito, String correo, String fecha_ingreso,
@@ -255,12 +247,4 @@ public class EmpleadoBean implements Serializable {
 }
 	
 	
-
-
-	
-
-
-	
-	
-
 

@@ -84,7 +84,7 @@ public class ServletPagoFinalTx extends HttpServlet {
 			unidadesActuales = stock - carrito.getCantidad();					
 			log.debug("stock actual "  + unidadesActuales);	
 					
-			carrito.setStockActual(unidadesActuales);;
+			carrito.setStockActual(unidadesActuales);
 		}
 		
 		BoletaDAO boletaDAO = new BoletaDAOImpl();

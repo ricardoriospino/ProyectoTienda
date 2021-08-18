@@ -122,7 +122,6 @@ public class BoletaDAOImpl implements BoletaDAO {
 			
 			log.debug("id boleta " + idBoleta);
 			
-			
 			//insertar detalle (recorrer un for)
 			for(CarritoCompraBean carrito: lstCarrito) {
 				

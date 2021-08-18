@@ -77,7 +77,7 @@ public class ServletListaExportarExcel extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 				out.println("<table>");
-				 out.println("<tr><th>Orden </th><th>ID </th><th>Nombre producto</th>"
+				 out.println("<tr><th>Orden </th><th>D </th><th>Nombre producto</th>"
 				 		+ "<th>Precio</th><th>Stock actual</th><th>Tipo de producto</th></tr>");
 				 for(int i=0;i<lstProductos.size();i++) { // recorre lista empleados 
 					 ProductoBean producto = lstProductos.get(i);

@@ -57,7 +57,7 @@ public class ServletGestionVenta extends HttpServlet {
 			
 		if("inicioVenta".equals(accion)) {
 			// borramos session de clientes seleccionado
-			misession.removeAttribute("clienteComprador");		
+			misession.removeAttribute("clienteComprador");	
 			List<ClienteNaturalyJuridicoBean>lstClienteNaturalJuridico = dao.listaClienteNaturalyJuridico();
 			request.setAttribute("listaClienteNaturalJuridico", lstClienteNaturalJuridico);
 			

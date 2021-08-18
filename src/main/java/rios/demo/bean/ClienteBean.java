@@ -14,6 +14,7 @@ public class ClienteBean implements Serializable {
 	private String telefono;
 	private long codigo_distrito;
 	private String correo;
+	
 	// sobre carga de constructores 
 	public ClienteBean() {
 		
@@ -66,10 +67,6 @@ public class ClienteBean implements Serializable {
 		this.apellido_ma = apellido_ma;
 	}
 	
-
-
-	
-
 	public int getId() {
 		return id;
 	}

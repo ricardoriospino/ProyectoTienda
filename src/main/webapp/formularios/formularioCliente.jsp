@@ -139,6 +139,13 @@ if(!valido){ // si valido es false
 								<div class="col-lg-9">
 									<select class="form-control" name="Pcodigo_distrito" required>
 										<c:forEach var="distrito" items="${lstDistrito}">
+										
+<!-- 										<li class="nav-item"> -->
+<!-- 	                <a class="nav-link" href="#"> -->
+	                    
+<%-- 	                     ${menu.descripcion}</a> --%>
+<!-- 	            </li>       -->
+            
 											<c:choose>
 												<c:when test="${distrito.id == objClienteNatural.codigo_distrito }">
 													<option value="${distrito.id}" selected="selected">${distrito.descripcion}</option>

@@ -15,7 +15,8 @@
 		<div class="collapse navbar-collapse" id="navbar">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link active"href="<%=request.getContextPath()%>/menuPrincipalTienda.jsp">Inicio</a>
+				
+					<a class="nav-link active"href="<%=request.getContextPath()%>/ServletLogeoUsuario?listar=E">Inicio</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="<%=request.getContextPath()%>/ServletGestionVenta?p_accion=inicioVenta">Venta</a>
